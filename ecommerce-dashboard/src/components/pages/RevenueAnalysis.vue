@@ -17,8 +17,8 @@
 
         <div class="bg-white p-6 rounded-2xl shadow transition duration-300">
           <h2 class="text-xl font-semibold mb-4 text-gray-800">Revenue Chart</h2>
-          <div class="h-64 bg-gray-200 rounded-lg flex items-center justify-center text-gray-500 text-lg">
-            [Chart Placeholder]
+          <div class="h-64">
+            <RevenueChart :chart-data="chartData" />
           </div>
         </div>
       </div>
@@ -29,20 +29,44 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
+import RevenueChart from '../pages/RevenueChart.vue'
 
 const totalOrders = ref(0)
 const totalRevenue = ref(0)
+const chartData = ref({
+  labels: [],
+  datasets: []
+})
 
 onMounted(async () => {
   try {
     const res = await axios.get('http://localhost:5000/api/products')
-    totalOrders.value = res.data.length
-    totalRevenue.value = res.data.reduce((acc, p) => acc + p.price * p.stock, 0)
+    const products = res.data
+
+    totalOrders.value = products.length
+    totalRevenue.value = products.reduce((acc, p) => acc + p.price * p.stock, 0)
+
+  
+    chartData.value = {
+      labels: products.map(p => p.name),
+      datasets: [
+        {
+          label: 'Revenue',
+          data: products.map(p => p.price * p.stock),
+          backgroundColor: 'rgba(99, 102, 241, 0.2)', 
+          borderColor: 'rgba(99, 102, 241, 1)',
+          borderWidth: 2,
+          fill: true,
+          tension: 0.4
+        }
+      ]
+    }
   } catch (error) {
     console.error('Error fetching data:', error)
   }
 })
 </script>
+
 
 <style scoped>
 .fade-enter-active, .fade-leave-active {

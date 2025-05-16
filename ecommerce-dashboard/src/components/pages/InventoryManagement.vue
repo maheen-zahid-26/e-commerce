@@ -2,7 +2,7 @@
   <div class="bg-white min-h-screen p-4 sm:p-6 text-gray-900">
     <h1 class="text-2xl sm:text-3xl font-bold mb-6 text-green-600">Inventory Management</h1>
 
-    <!-- Search and Sort -->
+
     <div class="flex flex-col sm:flex-row gap-4 mb-6">
       <input
         v-model="search"
@@ -15,7 +15,7 @@
       </select>
     </div>
 
-    <!-- Products Table -->
+ 
     <div class="overflow-x-auto rounded shadow border border-gray-300">
       <transition-group name="fade" tag="table" class="w-full min-w-[640px] table-fixed">
         <thead>
@@ -43,8 +43,8 @@
           >
             <td class="p-3">
               <img
-                v-if="product.image"
-                :src="`http://localhost:5000/uploads/${product.image}`"
+                v-if="product.imageUrl"
+                :src="`http://localhost:5000${product.imageUrl}`"
                 alt="Product Image"
                 class="h-16 w-16 object-cover rounded"
               />
@@ -103,7 +103,7 @@
       </transition-group>
     </div>
 
-    <!-- Low stock alert -->
+   
     <transition name="fade">
       <div
         v-if="lowStockProducts.length"

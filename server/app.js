@@ -12,7 +12,8 @@ app.use(cors());
 app.use(express.json());
 
 // Serve uploaded images statically
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use('/uploads', express.static('uploads'))
+
 
 
 // Routes
@@ -24,11 +25,11 @@ mongoose.connect('mongodb://localhost:27017/ecommerce', {
   useUnifiedTopology: true
 })
   .then(() => {
-    console.log('✅ MongoDB connected');
+    console.log('MongoDB connected');
     app.listen(PORT, () => {
-      console.log(`🚀 Server running on http://localhost:${PORT}`);
+      console.log(`Server running on http://localhost:${PORT}`);
     });
   })
   .catch(err => {
-    console.error('❌ MongoDB connection error:', err);
+    console.error('MongoDB connection error:', err);
   });
