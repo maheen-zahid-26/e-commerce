@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav class="bg-gray-800 p-4 flex gap-4">
+    <nav class="bg-gray-800 p-4 flex justify-center gap-4">
       <router-link
         to="/revenue"
         class="text-gray-200 font-bold no-underline"
