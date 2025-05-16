@@ -42,12 +42,14 @@
             class="transition-all duration-300 border-b border-gray-200 text-sm sm:text-base"
           >
             <td class="p-3">
-              <img
-                v-if="product.imageUrl"
-                :src="`http://localhost:5000${product.imageUrl}`"
+            <img
+                v-if="product.image"
+                :src="`http://localhost:5000${product.image}`"
                 alt="Product Image"
                 class="h-16 w-16 object-cover rounded"
               />
+
+
               <div v-else class="h-16 w-16 bg-gray-300 flex items-center justify-center text-gray-600 rounded">
                 No Image
               </div>
